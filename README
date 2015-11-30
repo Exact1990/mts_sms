@@ -1,0 +1,2 @@
+MtsSms.config(login: 'login', password: 'pass', naming: 'phone')
+MtsSms::Message.new('Hello world!').send_sms('79---------')
