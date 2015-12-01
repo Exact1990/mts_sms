@@ -20,6 +20,7 @@ module MtsSms
     @@md5_password = Digest::MD5.hexdigest(attrs[:password])
     @@naming = attrs[:naming] if attrs[:naming]
     @@wsdl_api_url = attrs[:wsdl_api_url] if attrs[:wsdl_api_url]
+    @@logger = attrs[:logger]
   end
 
   def self.send_sms msg, numbers
