@@ -2,12 +2,15 @@ require 'mts_sms/exception'
 require 'mts_sms/number'
 require 'mts_sms/message'
 require 'savon'
+require 'active_support'
 
 module MtsSms
   mattr_accessor :login
   mattr_accessor :md5_password
   mattr_accessor :naming
   mattr_accessor :wsdl_api_url
+  mattr_accessor :logger
+  @@logger = Logger.new(STDOUT)
   @@wsdl_api_url = 'http://www.mcommunicator.ru/m2m/m2m_api.asmx?WSDL'
 
   ERRORS_CODES = ['1', '103', '506', '700', '701', '702', '703', '704', '705', '706', '707', '708', '709', '710']
@@ -28,7 +31,7 @@ module MtsSms
     code = error_data.try(:[], :fault).try(:[], :detail).try(:[], :code)
     raise MtsSms::Exception::Base.new(message, error) if code.nil? || !ERRORS_CODES.include?(code)
     message = MtsSms::Exception::Base.generate_log_message(message, error)
-    Rails.logger.debug "[MTS SMS] #{message}"
+    logger.debug "[MTS SMS] #{message}"
     error_data[:fault]
   end
 end

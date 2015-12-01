@@ -16,7 +16,13 @@ Gem::Specification.new do |s|
 
   s.author = 'Zykov Nikolay'
   s.email = 'nzykov@voltmobi.com'
-  s.homepage = 'http://'
+  s.homepage = 'https://github.com/Exact1990/mts_sms'
 
   s.add_dependency('savon', '= 1.2.0')
+  s.add_dependency('activesupport', '>=2.3.4')
+  s.add_dependency('feedzirra')
+
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'webmock'
 end
