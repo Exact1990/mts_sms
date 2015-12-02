@@ -3,6 +3,7 @@ require 'mts_sms/number'
 require 'mts_sms/message'
 require 'savon'
 require 'active_support'
+require 'active_support/core_ext/object/try'
 
 module MtsSms
   mattr_accessor :login
@@ -13,14 +14,15 @@ module MtsSms
   @@logger = Logger.new(STDOUT)
   @@wsdl_api_url = 'http://www.mcommunicator.ru/m2m/m2m_api.asmx?WSDL'
 
-  ERRORS_CODES = ['1', '103', '506', '700', '701', '702', '703', '704', '705', '706', '707', '708', '709', '710']
+  ERRORS_CODES = ['1', '6', '103', '506', '700', '701', '702', '703', '704', '705', '706', '707', '708', '709', '710',
+                  '711', '713', '714', '715', '718']
 
   def self.config(attrs)
     @@login = attrs[:login]
-    @@md5_password = Digest::MD5.hexdigest(attrs[:password])
+    @@md5_password = Digest::MD5.hexdigest(attrs[:password]) if attrs[:password]
     @@naming = attrs[:naming] if attrs[:naming]
     @@wsdl_api_url = attrs[:wsdl_api_url] if attrs[:wsdl_api_url]
-    @@logger = attrs[:logger]
+    @@logger = attrs[:logger] if attrs[:logger]
   end
 
   def self.send_sms msg, numbers

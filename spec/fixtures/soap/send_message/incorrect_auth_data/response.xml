@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <soap:Fault>
+      <faultcode>soap:Client</faultcode>
+      <faultstring>INCORRECT_PASSWORD</faultstring>
+      <faultactor>http://www.mcommunicator.ru/m2m/m2m_api.asmx</faultactor>
+      <detail>
+        <code xmlns="http://mcommunicator.ru/M2M/">103</code>
+        <description xmlns="http://mcommunicator.ru/M2M/">INCORRECT_PASSWORD</description>
+      </detail>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>
