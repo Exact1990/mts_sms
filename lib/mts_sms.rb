@@ -33,8 +33,6 @@ module MtsSms
     error_data = error.to_hash
     code = error_data.try(:[], :fault).try(:[], :detail).try(:[], :code)
     raise MtsSms::Exception::Base.new(message, error) if code.nil? || !ERRORS_CODES.include?(code)
-    message = MtsSms::Exception::Base.generate_log_message(message, error)
-    logger.debug "[MTS SMS] #{message}"
     error_data[:fault]
   end
 end
